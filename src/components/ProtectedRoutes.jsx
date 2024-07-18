@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import api from '../utils/api';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants';
 
-// wrapper functions for protected routes
+// Wrapper functions for protected routes
 const ProtectedRoute = ({ children }) => {
   const [isAuthorized, setIsAuthorized] = useState(null);
 
@@ -16,10 +16,10 @@ const ProtectedRoute = ({ children }) => {
 
   // Automatically refresh access token
   const refreshToken = async () => {
-    const refreshToken = localStorage.getItem(REFRESH_TOKEN);
     try {
-      // Send request to backend with refresh token to get a New access token
+      const refreshToken = localStorage.getItem(REFRESH_TOKEN);
       const response = await api.post('/api/token/refresh/', { refresh: refreshToken });
+
       if (response.status === 200) {
         localStorage.setItem(ACCESS_TOKEN, response.data.access);
         setIsAuthorized(true);
@@ -27,32 +27,35 @@ const ProtectedRoute = ({ children }) => {
         setIsAuthorized(false);
       }
     } catch (error) {
-      console.log(error);
+      console.error('Error refreshing token:', error);
       setIsAuthorized(false);
     }
   };
 
   // Check if we need to refresh the token
   const auth = async () => {
-    // 1. Check to see if we have an access token
-    // 2. If we do, check if expired
-    // 3. If expired, check if we can refresh the token
-    // 4. If we cannot refresh the token or expired, redirect to login
-
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
+
     if (!accessToken) {
       setIsAuthorized(false);
       return;
     }
-    // If we do have the token, we let jwtDecode to decode the token and get the expiration date
-    const decoded = jwtDecode(accessToken);
-    const accessTokenExpiration = decoded.exp;
-    const now = Date.now() / 1000; // get in secs
 
-    if (accessTokenExpiration < now) {
-      await refreshToken();
-      return;
-    } else setIsAuthorized(true);
+    try {
+      const decoded = jwtDecode(accessToken);
+      const accessTokenExpiration = decoded.exp;
+      const currentTime = Date.now() / 1000;
+
+      if (accessTokenExpiration < currentTime) {
+        await refreshToken();
+        return;
+      } else {
+        setIsAuthorized(true);
+      }
+    } catch (error) {
+      console.error('Error decoding access token:', error);
+      setIsAuthorized(false);
+    }
   };
 
   // Check if the user is authorized

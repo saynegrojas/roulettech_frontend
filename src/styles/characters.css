@@ -1,3 +1,8 @@
-grid-container {
+.grid-container {
   margin: 2rem;
+}
+
+.avatar-title {
+  display: flex;
+  justify-content: space-evenly;
 }

@@ -11,6 +11,7 @@ import api from '../../utils/api';
 import CharacterDetailsModal from './CharacterDetailsModal';
 import useToastNotification from '../hooks/useToastNotification';
 import LogoutNavigation from '../LogoutNavigation';
+import Separate from '../Separate';
 
 const Characters = ({ characters }) => {
   const [showDetails, setShowDetails] = useState(false);
@@ -46,16 +47,13 @@ const Characters = ({ characters }) => {
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         {characters.map((char) => (
           <Grid item xs={4} key={char.id}>
-            {/* <Item>{char.name}</Item> */}
             <Card sx={{ maxWidth: 300 }}>
               <CardContent>
                 <CardMedia
                   sx={{ height: 140 }}
                   image={char.image}
                   alt={char.name}
-                  style={{
-                    backgroundSize: 'contain',
-                  }}
+                  style={{ backgroundSize: 'contain' }}
                 />
                 <Typography
                   gutterBottom

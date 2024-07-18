@@ -4,6 +4,8 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Loading from '../Loading';
+import '../../styles/characters.css';
+import Separate from '../Separate';
 
 const style = {
   position: 'absolute',
@@ -15,6 +17,7 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  borderRadius: '5px',
 };
 
 const CharacterDetailsModal = ({ open, handleClose, character, isLoading }) => (
@@ -28,14 +31,17 @@ const CharacterDetailsModal = ({ open, handleClose, character, isLoading }) => (
       <Box sx={style}>
         {!isLoading ? (
           <>
-            <Avatar
-              alt={character?.name}
-              src={character?.image}
-              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-            />
-            <Typography variant='h6' component='h2'>
-              {character?.name}
-            </Typography>
+            <span className='avatar-title'>
+              <Avatar
+                alt={character?.name}
+                src={character?.image}
+                sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+              />
+              <Typography variant='h6' component='h2'>
+                {character?.name}
+              </Typography>
+            </span>
+            <Separate marginType='m' />
             <Typography sx={{ mt: 2 }}>Location: {character?.location?.name}</Typography>
             <Typography sx={{ mt: 2 }}>Origin: {character?.origin?.name}</Typography>
             <Typography sx={{ mt: 2 }}>Status: {character?.status}</Typography>

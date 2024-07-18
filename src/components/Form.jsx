@@ -9,6 +9,7 @@ import Loading from './Loading';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
+import Separate from './Separate';
 
 // route: get token / register
 // method: login / register
@@ -86,7 +87,7 @@ const Form = ({ route, method }) => {
       }}
     >
       <h1 className='form-title'>{formTitle}</h1>
-      <Divider sx={{ width: '100%', margin: 'revert', mb: 2 }} />
+      <Separate marginType='mb' marginValue={2} />
 
       <TextField
         label='Username'
@@ -118,7 +119,8 @@ const Form = ({ route, method }) => {
         {formTitle}
       </Button>
 
-      <Divider sx={{ width: '100%', margin: 'revert', marginTop: '1rem' }} />
+      <Separate marginType='mt' />
+
       <div className='option-selection'>
         <Typography variant='body2' color='text.secondary'>
           {method === 'login' ? `Don't have an account?` : 'Already have a account?'}
