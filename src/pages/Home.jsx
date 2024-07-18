@@ -7,9 +7,9 @@ import Loading from '../components/Loading';
 
 const Home = ({ token }) => {
   const [characters, setCharacters] = useState([]);
-  const { toastNotification } = useToastNotification();
   const [isLoading, setIsLoading] = useState(token ? false : true);
 
+  const { toastNotification } = useToastNotification();
   const getCharacters = () => {
     api
       .get('/api/characters/')

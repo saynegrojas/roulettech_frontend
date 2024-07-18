@@ -8,11 +8,8 @@ import TextField from '@mui/material/TextField';
 import Loading from './Loading';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import Divider from '@mui/material/Divider';
 import Separate from './Separate';
 
-// route: get token / register
-// method: login / register
 const Form = ({ route, method }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -36,23 +33,16 @@ const Form = ({ route, method }) => {
     setPasswordError(false);
   };
 
-  const handleSubmit = async (e) => {
-    let hasError = false;
-
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setIsLoading(true);
 
-    if (username.trim() === '') {
-      setUsernameError(true);
-      hasError = true;
-    }
+    const hasError = !username.trim() || !password.trim();
 
-    if (password.trim() === '') {
-      setPasswordError(true);
-      hasError = true;
-    }
-
-    if (!hasError) {
+    if (hasError) {
+      setUsernameError(!username.trim());
+      setPasswordError(!password.trim());
+    } else {
       try {
         const response = await api.post(route, { username, password });
         const data = response.data;
@@ -61,16 +51,18 @@ const Form = ({ route, method }) => {
           localStorage.setItem(ACCESS_TOKEN, data.access);
           localStorage.setItem(REFRESH_TOKEN, data.refresh);
           navigate('/');
-        } else navigate('/login');
+        } else {
+          navigate('/login');
+        }
       } catch (err) {
-        console.log(err);
+        console.error('Error submitting form:', error);
       } finally {
         setIsLoading(false);
       }
     }
   };
 
-  const isFormValid = username.trim() !== '' && password.trim() !== '';
+  const isFormValid = username.trim() && password.trim();
 
   if (isLoading) return <Loading />;
 
@@ -90,7 +82,7 @@ const Form = ({ route, method }) => {
       <Separate marginType='mb' marginValue={2} />
 
       <TextField
-        label='Username'
+        label={method === 'login' ? 'Username' : 'Create Username'}
         value={username}
         onChange={handleUsernameChange}
         required
@@ -99,7 +91,7 @@ const Form = ({ route, method }) => {
         fullWidth
       />
       <TextField
-        label='Password'
+        label={method === 'login' ? 'Password' : 'New Password'}
         type='password'
         value={password}
         onChange={handlePasswordChange}

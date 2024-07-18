@@ -8,10 +8,10 @@ import ProtectedRoute from './components/ProtectedRoutes';
 import Logout from './components/Logout';
 import RegisterAndLogout from './components/RegisterAndLogout';
 import Layout from './components/Layout';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const access_token = localStorage.getItem('access_token');
-  console.log(access_token, 'access');
   return (
     <>
       <CssBaseline />
@@ -20,11 +20,11 @@ function App() {
           <Route
             path='/'
             element={
-              // Wrapper around Home component that checks for access token and checks if valid
               <ProtectedRoute>
                 <Layout>
                   <Home token={access_token} />
                 </Layout>
+                <ToastContainer />
               </ProtectedRoute>
             }
           />

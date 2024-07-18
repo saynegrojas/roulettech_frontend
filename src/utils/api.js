@@ -1,15 +1,14 @@
-// interceptor --> intercepts any request we are sending and automatically add headers to the request
 import axios from 'axios';
 import { ACCESS_TOKEN } from '../constants';
 
-// GET API
+// Intercept all requests to add authorization header
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
 api.interceptors.request.use(
   (config) => {
-    // look in local storage and see if we have an access token
+    // Look in local storage and see if access token is visible
     const token = localStorage.getItem(ACCESS_TOKEN);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

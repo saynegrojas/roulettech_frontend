@@ -1,4 +1,3 @@
-// Represent a wrapper for a protected route that must have an authorization token before accessing the endpoint
 import { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
@@ -58,7 +57,6 @@ const ProtectedRoute = ({ children }) => {
     }
   };
 
-  // Check if the user is authorized
   if (isAuthorized === null) return <div>Loading ...</div>;
 
   return isAuthorized ? children : <Navigate to='/login' replace />;

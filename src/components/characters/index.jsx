@@ -11,7 +11,6 @@ import api from '../../utils/api';
 import CharacterDetailsModal from './CharacterDetailsModal';
 import useToastNotification from '../hooks/useToastNotification';
 import LogoutNavigation from '../LogoutNavigation';
-import Separate from '../Separate';
 
 const Characters = ({ characters }) => {
   const [showDetails, setShowDetails] = useState(false);
@@ -38,7 +37,7 @@ const Characters = ({ characters }) => {
           setIsLoading(false);
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error('Error while fetching details', error));
   };
 
   return (
