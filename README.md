@@ -1,8 +1,34 @@
-# React + Vite
+# Roulettech Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend part of the Roulettech web application, built with React using Vite. It communicates with the Roulettech backend API to provide a seamless user experience.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/roulettech-frontend.git
+
+2. Clone the repository:
+
+   ```npm install```
+
+3. Start the development server:
+
+   ```npm run dev``` in the `roulettech-frontend` directory to run the React application in development mode.
+
+4. Create a .env file:
+
+   Create a .env file in the root directory and add the following environment variables:```VITE_API_URL```.
+
+5. Open `http://localhost:5173/` in your browser to view the application.
+
+## Deployment
+
+The production build deployed to AWS S3 static hosting service.
+
+6. Build for production:
+
+   ```npm run build``` in the `roulettech-frontend` directory to build the production-ready version of the application.
+
+7. Upload static files to AWS S3 Bucket:
