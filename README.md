@@ -7,7 +7,7 @@ This is the frontend part of the Roulettech web application, built with React us
 1. Clone the repository:
 
    ```bash
-   https://github.com/saynegrojas/roulettech_frontend.git
+   git clone https://github.com/saynegrojas/roulettech_frontend.git
 
 2. Clone the repository:
 
